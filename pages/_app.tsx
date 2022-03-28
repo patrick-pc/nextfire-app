@@ -6,7 +6,7 @@ import { UserContext } from '../lib/context'
 import { useUserData } from '../lib/hooks'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const userData: any = useUserData()
+  const userData = useUserData()
 
   return (
     <>

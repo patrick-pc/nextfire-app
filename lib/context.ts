@@ -1,7 +1,8 @@
 import { createContext } from 'react'
+import { User } from 'firebase/auth'
 
 export interface IUser {
-  user: null
+  user?: User | null
   username: null
 }
 

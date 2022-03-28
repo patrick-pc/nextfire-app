@@ -1,5 +1,5 @@
 import { auth, firestore, googleAuthProvider } from '../lib/firebase'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { UserContext } from '../lib/context'
 import debounce from 'lodash.debounce'
 
@@ -51,7 +51,7 @@ function UsernameForm() {
 
   const { user, username } = useContext(UserContext)
 
-  const onSubmit = async (e: any) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     // Create refs for both documents
@@ -70,7 +70,7 @@ function UsernameForm() {
     await batch.commit()
   }
 
-  const onChange = (e: any) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Force form value typed in form to match correct format
     const val = e.target.value.toLowerCase()
     const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/
