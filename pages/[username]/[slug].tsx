@@ -2,6 +2,7 @@ import styles from '../../styles/Post.module.css'
 import PostContent from '../../components/PostContent'
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase'
 import { useDocumentData } from 'react-firebase-hooks/firestore'
+import Metatags from '../../components/Metatags'
 
 export async function getStaticProps({ params }) {
   const { username, slug } = params
@@ -51,6 +52,7 @@ export default function Post(props) {
 
   return (
     <main className={styles.container}>
+      <Metatags />
       <section>
         <PostContent post={post} />
       </section>

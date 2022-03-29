@@ -1,3 +1,9 @@
+import Metatags from '../../components/Metatags'
+
 export default function AdminPostsEdit({}) {
-  return <main></main>
+  return (
+    <main>
+      <Metatags />
+    </main>
+  )
 }
