@@ -30,7 +30,7 @@ function PostList() {
   const query = ref.orderBy('createdAt')
   const [querySnapshot] = useCollection(query)
 
-  const posts = querySnapshot?.docs.map((doc) => doc.data())
+  const posts = querySnapshot?.docs.map((doc) => doc.data()) as any
 
   return (
     <>
@@ -52,7 +52,7 @@ function CreateNewPost() {
   const isValid = title.length > 3 && title.length < 100
 
   // Create a new post in firestore
-  const createPost = async (e) => {
+  const createPost = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const uid = auth.currentUser.uid
     const ref = firestore

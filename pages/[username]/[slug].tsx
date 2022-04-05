@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { useDocumentData } from 'react-firebase-hooks/firestore'
 import { useContext } from 'react'
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }: any) {
   const { username, slug } = params
   const userDoc = await getUserWithUsername(username)
 
@@ -51,9 +51,9 @@ export async function getStaticPaths() {
   }
 }
 
-export default function Post(props) {
+export default function Post(props: any) {
   const postRef = firestore.doc(props.path)
-  const [realtimePost] = useDocumentData(postRef)
+  const [realtimePost] = useDocumentData(postRef as any)
 
   const post = realtimePost || props.post
 
@@ -64,7 +64,7 @@ export default function Post(props) {
       <Metatags title={post.title} description={post.title} />
 
       <section>
-        <PostContent post={post} />
+        <PostContent post={post} admin={false} />
       </section>
 
       <aside className="card">

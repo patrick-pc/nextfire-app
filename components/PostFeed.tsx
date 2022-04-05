@@ -1,16 +1,26 @@
 import Link from 'next/link'
+import { PostProps } from '../lib/context'
 
-export default function PostFeed({ posts, admin }) {
-  return posts
-    ? posts.map((post) => (
-        <PostItem post={post} key={post.slug} admin={admin} />
-      ))
-    : null
+type PostFeedProps = {
+  posts: []
+  admin: boolean
 }
 
-function PostItem({ post, admin = false }) {
+export default function PostFeed({ posts, admin }: PostFeedProps) {
+  return (
+    <>
+      {posts
+        ? posts.map((post) => (
+            <PostItem post={post} key={post?.['slug']} admin={admin} />
+          ))
+        : null}
+    </>
+  )
+}
+
+function PostItem({ post, admin = false }: PostProps) {
   // Naive method to calc word count and read time
-  const wordCount = post?.content.trim().split(/\s+/g).length
+  const wordCount = post.content.trim().split(/\s+/g).length
   const minutesToRead = (wordCount / 100 + 1).toFixed(0)
 
   return (
@@ -21,7 +31,7 @@ function PostItem({ post, admin = false }) {
         </a>
       </Link>
 
-      <Link href={`/${post.username}/${post.slug}`}>
+      <Link href={`/${post.username}/${post.slug}`} passHref>
         <h2>
           <a>{post.title}</a>
         </h2>
@@ -37,7 +47,7 @@ function PostItem({ post, admin = false }) {
       {/* If admin view, show extra controls for user */}
       {admin && (
         <>
-          <Link href={`/admin/${post.slug}`}>
+          <Link href={`/admin/${post.slug}`} passHref>
             <h3>
               <button className="btn-blue">Edit</button>
             </h3>

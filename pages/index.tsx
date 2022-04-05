@@ -8,7 +8,7 @@ import { useState } from 'react'
 // Max post to query per page
 const LIMIT = 5
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const postsQuery = firestore
     .collectionGroup('posts')
     .where('published', '==', true)
@@ -22,7 +22,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-const Home: NextPage = (props) => {
+const Home: NextPage = (props: any) => {
   const [posts, setPosts] = useState(props.posts)
   const [loading, setLoading] = useState(false)
 
@@ -56,7 +56,7 @@ const Home: NextPage = (props) => {
 
   return (
     <main>
-      <PostFeed posts={posts} />
+      <PostFeed posts={posts} admin={false} />
 
       {!loading && !postsEnd && (
         <button onClick={getMorePosts}>Load more</button>

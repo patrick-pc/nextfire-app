@@ -36,7 +36,7 @@ export const STATE_CHANGED = firebase.storage.TaskEvent.STATE_CHANGED
  * Gets a users/{uid} document with username
  * @param  {string} username
  */
-export async function getUserWithUsername(username) {
+export async function getUserWithUsername(username: string) {
   const usersRef = firestore.collection('users')
   const query = usersRef.where('username', '==', username).limit(1)
   const userDoc = (await query.get()).docs[0]
@@ -47,7 +47,7 @@ export async function getUserWithUsername(username) {
  * Converts a firestore document to JSON
  * @param  {DocumentSnapshot} doc
  */
-export function postToJSON(doc) {
+export function postToJSON(doc: any) {
   const data = doc.data()
   return {
     ...data,

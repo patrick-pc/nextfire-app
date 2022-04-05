@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
+import { PostProps } from '../lib/context'
 
 // UI component for main post content
-export default function PostContent({ post }) {
+export default function PostContent({ post }: PostProps) {
   const createdAt =
     typeof post?.createdAt === 'number'
       ? new Date(post.createdAt)

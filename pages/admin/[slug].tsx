@@ -12,7 +12,7 @@ import ReactMarkdown from 'react-markdown'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 
-export default function AdminPostEdit(props) {
+export default function AdminPostEdit() {
   return (
     <AuthCheck>
       <PostManager />
@@ -31,7 +31,7 @@ function PostManager() {
     .doc(auth.currentUser.uid)
     .collection('posts')
     .doc(slug)
-  const [post] = useDocumentData(postRef)
+  const [post] = useDocumentData(postRef as any)
 
   return (
     <main className={styles.container}>
@@ -63,7 +63,7 @@ function PostManager() {
   )
 }
 
-function PostForm({ defaultValues, postRef, preview }) {
+function PostForm({ defaultValues, postRef, preview }: any) {
   const {
     register,
     handleSubmit,
@@ -75,7 +75,7 @@ function PostForm({ defaultValues, postRef, preview }) {
     mode: 'onChange',
   })
 
-  const updatePost = async ({ content, published }) => {
+  const updatePost = async ({ content, published }: any) => {
     await postRef.update({
       content,
       published,

@@ -9,7 +9,7 @@ export default function ImageUploader() {
   const [downloadURL, setDownloadURL] = useState(null)
 
   // Creates a Firebase Upload Task
-  const uploadFile = async (e) => {
+  const uploadFile = async (e: any) => {
     // Get the file
     const file = Array.from(e.target.files)[0]
     const extension = file.type.split('/')[1]
