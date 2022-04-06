@@ -4,6 +4,7 @@ import Loader from '../components/Loader'
 import { firestore, fromMillis, postToJSON } from '../lib/firebase'
 
 import { useState } from 'react'
+import Metatags from '../components/Metatags'
 
 // Max post to query per page
 const LIMIT = 5
@@ -56,6 +57,11 @@ const Home: NextPage = (props: any) => {
 
   return (
     <main>
+      <Metatags
+        title="Home Page"
+        description="Get the latest posts on our site"
+      />
+
       <PostFeed posts={posts} admin={false} />
 
       {!loading && !postsEnd && (
