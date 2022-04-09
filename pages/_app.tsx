@@ -4,17 +4,20 @@ import Navbar from '../components/Navbar'
 import { Toaster } from 'react-hot-toast'
 import { UserContext } from '../lib/context'
 import { useUserData } from '../lib/hooks'
+import { ThemeProvider } from 'next-themes'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const userData = useUserData()
 
   return (
     <>
-      <UserContext.Provider value={userData}>
-        <Navbar />
-        <Component {...pageProps} />
-        <Toaster />
-      </UserContext.Provider>
+      <ThemeProvider enableSystem={true} attribute="class">
+        <UserContext.Provider value={userData}>
+          <Navbar />
+          <Component {...pageProps} />
+          <Toaster />
+        </UserContext.Provider>
+      </ThemeProvider>
     </>
   )
 }
