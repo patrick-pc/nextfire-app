@@ -24,7 +24,7 @@ export default function Navbar() {
     if (currentTheme === 'dark') {
       return (
         <SunIcon
-          className="w-10 h-10 text-yellow-500 "
+          className="w-10 h-10 text-yellow-500"
           role="button"
           onClick={() => setTheme('light')}
         />
@@ -32,7 +32,7 @@ export default function Navbar() {
     } else {
       return (
         <MoonIcon
-          className="w-10 h-10 text-gray-900 "
+          className="w-10 h-10 text-gray-900"
           role="button"
           onClick={() => setTheme('dark')}
         />
@@ -54,11 +54,11 @@ export default function Navbar() {
       <ul>
         <li>
           <Link href="/" passHref>
-            <button className="btn-logo">NXT</button>
+            <button className="btn-logo">dev3</button>
           </Link>
         </li>
 
-        <li>{renderThemeToggle()}</li>
+        {/* <li>{renderThemeToggle()}</li> */}
 
         {/* user is signed-in and has username */}
         {username && (
