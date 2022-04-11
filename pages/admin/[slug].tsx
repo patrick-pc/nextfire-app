@@ -30,7 +30,7 @@ function PostManager() {
     .collection('users')
     .doc(auth.currentUser.uid)
     .collection('posts')
-    .doc(slug)
+    .doc(slug as any)
   const [post] = useDocumentData(postRef as any)
 
   return (
