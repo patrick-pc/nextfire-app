@@ -3,14 +3,14 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { UserContext } from '../lib/context'
 import debounce from 'lodash.debounce'
 import Metatags from '../components/Metatags'
+import Link from 'next/link'
 
 export default function EnterPage({}) {
   const { user, username } = useContext(UserContext)
 
   // 1. user signed out <SignInButton />
   // 2. user signed in, but missing username <UsernameForm />
-  // 3. user signed in, has username <SignOutButton />
-
+  // 3. user signed in, has username <WritePostsButton />
   return (
     <main>
       <Metatags title="Enter" description="Sign up for this amazing app!" />
@@ -18,7 +18,7 @@ export default function EnterPage({}) {
         !username ? (
           <UsernameForm />
         ) : (
-          <SignOutButton />
+          <WritePostsButton />
         )
       ) : (
         <SignInButton />
@@ -34,15 +34,24 @@ function SignInButton() {
   }
 
   return (
-    <button className="btn-google" onClick={signInWithGoogle}>
-      Sign in with Google
-    </button>
+    <>
+      <button className="btn-google" onClick={signInWithGoogle}>
+        <img src={'/google.png'} width="30px" /> Sign in with Google
+      </button>
+      {/* <button onClick={() => auth.signInAnonymously()}>
+        Sign in Anonymously
+      </button> */}
+    </>
   )
 }
 
-// Sign out button
-function SignOutButton() {
-  return <button onClick={() => auth.signOut()}>Sign Out</button>
+// Write posts button
+function WritePostsButton() {
+  return (
+    <Link href="/admin" passHref>
+      <button className="btn-blue">Write Posts</button>
+    </Link>
+  )
 }
 
 // Username form
@@ -53,21 +62,21 @@ function UsernameForm() {
 
   const { user, username } = useContext(UserContext)
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault()
 
     // Create refs for both documents
-    const userDoc = firestore.doc(`users/${user?.['uid']}`)
+    const userDoc = firestore.doc(`users/${user?.uid}`)
     const usernameDoc = firestore.doc(`usernames/${formValue}`)
 
     // Commit both docs together as a batch write.
     const batch = firestore.batch()
     batch.set(userDoc, {
       username: formValue,
-      photoURL: user?.['photoURL'],
-      displayName: user?.['displayName'],
+      photoURL: user?.photoURL,
+      displayName: user?.displayName,
     })
-    batch.set(usernameDoc, { uid: user?.['uid'] })
+    batch.set(usernameDoc, { uid: user?.uid })
 
     await batch.commit()
   }
@@ -130,7 +139,7 @@ function UsernameForm() {
             Choose
           </button>
 
-          <h3>Debug State</h3>
+          {/* <h3>Debug State</h3> */}
           <div>
             Username: {formValue}
             <br />
